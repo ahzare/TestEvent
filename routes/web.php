@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Panel\Admin\DashboardController;
+use App\Http\Controllers\Panel\Admin\RoleController;
 use App\Http\Controllers\Panel\LoginController;
 use App\Http\Controllers\Panel\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+    //roles
+    Route::resource('roles', RoleController::class, ['as' => 'admin']);
+
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });

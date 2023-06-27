@@ -26,6 +26,14 @@
                      with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
+                    <a href="{{route('admin.roles.index')}}"
+                       class="nav-link @if(($nav_link ?? '')  == 'roles') active @endif">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>Roles</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('logout')}}" class="nav-link">
                         <i class="nav-icon fas fa-lock"></i>
                         <p>Logout</p>
