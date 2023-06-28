@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('desc')->nullable();
             $table->string('url');
             $table->enum('type', ['doc', 'image', 'audio', 'video']);
+            $table->dateTime('uploaded_date');
             $table->unsignedBigInteger('earned')->default(0);
             $table->timestamps();
 
