@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,6 +18,14 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +58,7 @@ class RoleController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validatedData = Validator::make($request->all(), [
-            'name' => ['required', 'unique:roles,name'],
+            'name' => ['required', 'not_in:' . Admin::SUPER_ADMIN_ROLE, 'unique:roles,name'],
             'permissions' => 'required',
         ]);
 
@@ -103,7 +112,7 @@ class RoleController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $validatedData = Validator::make($request->all(), [
-            'name' => ['required' , Rule::unique('roles', 'name')->ignore($id)],
+            'name' => ['required', 'not_in:' . Admin::SUPER_ADMIN_ROLE, Rule::unique('roles', 'name')->ignore($id)],
             'permissions' => 'required',
         ]);
 
@@ -118,7 +127,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->permissions);
 
         return redirect()->route('admin.roles.index')
-            ->with('success','Role updated successfully');
+            ->with('success', 'Role updated successfully');
     }
 
     /**
@@ -131,6 +140,6 @@ class RoleController extends Controller
     {
         Role::destroy($id);
         return redirect()->route('admin.roles.index')
-            ->with('success','Role deleted successfully');
+            ->with('success', 'Role deleted successfully');
     }
 }

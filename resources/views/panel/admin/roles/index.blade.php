@@ -34,6 +34,11 @@
                                                     <input type="text" name="name" required class="form-control"
                                                            id="name" placeholder="Enter Role Name"
                                                            value="{{old('name')}}">
+                                                    @error('name')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group" style="display: grid;">
@@ -46,6 +51,11 @@
                                                             {{$permission->name}}</label>
 
                                                     @endforeach
+                                                    @error('permissions')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
 
                                                 <button class="btn btn-success" type="submit">Save</button>
@@ -81,16 +91,18 @@
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
 
-                                                <form method="POST" class="btn-group btn-group-sm"
-                                                      action="{{route('admin.roles.destroy' , ['role' => $role])}}">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger edit-role"
-                                                            onclick="return confirm('Will be deleted. Sure?')"
-                                                            type="submit" title="Delete">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
+                                                @if($role->name != \App\Models\Admin::SUPER_ADMIN_ROLE)
+                                                    <form method="POST" class="btn-group btn-group-sm"
+                                                          action="{{route('admin.roles.destroy' , ['role' => $role])}}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger edit-role"
+                                                                onclick="return confirm('Will be deleted. Sure?')"
+                                                                type="submit" title="Delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -104,4 +116,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @if($errors->any())
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#modal-add-form').modal('show');
+            });
+        </script>
+    @endif
 @endsection
