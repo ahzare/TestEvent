@@ -27,7 +27,7 @@ Route::post('register', [RegisterController::class, 'store'])->name('register');
 Route::get('login', [LoginController::class, 'create'])->name('login.form');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
 
     //roles
