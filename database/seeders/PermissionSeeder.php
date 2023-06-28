@@ -19,11 +19,15 @@ class PermissionSeeder extends Seeder
             'role-list',
             'role-create',
             'role-edit',
-            'role-delete'
+            'role-delete',
+            'admin-list',
+            'admin-create',
+            'admin-edit',
+            'admin-delete'
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::findOrCreate($permission);
         }
     }
 }
