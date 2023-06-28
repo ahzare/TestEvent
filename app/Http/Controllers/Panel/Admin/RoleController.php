@@ -26,7 +26,8 @@ class RoleController extends Controller
     {
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('panel.admin.roles.index', compact(['roles', 'permissions']));
+        return view('panel.admin.roles.index', compact(['roles', 'permissions']))
+            ->with(['nav_item' => 'roles', 'nav_link' => 'roles']);
     }
 
     /**
@@ -88,7 +89,8 @@ class RoleController extends Controller
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
-        return view('panel.admin.roles.edit', compact(['role', 'permissions', 'rolePermissions']));
+        return view('panel.admin.roles.edit', compact(['role', 'permissions', 'rolePermissions']))
+            ->with(['nav_item' => 'roles', 'nav_link' => 'roles']);
     }
 
     /**
