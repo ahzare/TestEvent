@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Panel\Admin\AdminController;
 use App\Http\Controllers\Panel\Admin\DashboardController;
 use App\Http\Controllers\Panel\Admin\RoleController;
 use App\Http\Controllers\Panel\LoginController;
@@ -31,6 +32,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     //roles
     Route::resource('roles', RoleController::class, ['as' => 'admin']);
+    //admins
+    Route::resource('admins', AdminController::class, ['as' => 'admin']);
 
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
