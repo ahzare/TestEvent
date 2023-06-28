@@ -44,7 +44,7 @@ class UserController extends BaseController
      *
      * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::guard('web')->user();
@@ -62,7 +62,7 @@ class UserController extends BaseController
      *
      * @return JsonResponse
      */
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
 
