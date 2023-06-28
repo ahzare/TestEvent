@@ -26,9 +26,16 @@
                      with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
+                    <a href="{{route('admin.admins.index')}}"
+                       class="nav-link @if(($nav_link ?? '')  == 'admins') active @endif">
+                        <i class="nav-icon fas fa-user-graduate"></i>
+                        <p>Admins</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}"
                        class="nav-link @if(($nav_link ?? '')  == 'roles') active @endif">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-list"></i>
                         <p>Roles</p>
                     </a>
                 </li>
