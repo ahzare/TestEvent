@@ -7,10 +7,12 @@
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" class="btn btn-default float-right" data-toggle="modal"
-                                    data-target="#modal-add-form">
-                                Add New Role
-                            </button>
+                            @can('role-create')
+                                <button type="button" class="btn btn-default float-right" data-toggle="modal"
+                                        data-target="#modal-add-form">
+                                    Add New Role
+                                </button>
+                            @endcan
                             <h4>Roles</h4>
                         </div>
 
@@ -67,50 +69,50 @@
                         </div>
                         {{--end add form modal--}}
 
-                        @php $i=1 @endphp
-
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($roles as $role)
+                        @can('role-list')
+                            @php $i=1 @endphp
+                            <div class="card-body p-0">
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
-                                        <td>{{$i++}}</td>
-                                        <td>{{$role->name}}</td>
-                                        <td>
-                                            <div class="btn-group btn-group-sm float-left">
-                                                <a href="{{route('admin.roles.edit' , ['role' => $role])}}"
-                                                   class="btn btn-info edit-role" title="Edit">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
+                                        <th style="width: 10px">#</th>
+                                        <th>Name</th>
+                                        <th>Action</th>
 
-                                                @if($role->name != \App\Models\Admin::SUPER_ADMIN_ROLE)
-                                                    <form method="POST" class="btn-group btn-group-sm"
-                                                          action="{{route('admin.roles.destroy' , ['role' => $role])}}">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger edit-role"
-                                                                onclick="return confirm('Will be deleted. Sure?')"
-                                                                type="submit" title="Delete">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                @endif
-                                            </div>
-                                        </td>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($roles as $role)
+                                        <tr>
+                                            <td>{{$i++}}</td>
+                                            <td>{{$role->name}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm float-left">
+                                                    <a href="{{route('admin.roles.edit' , ['role' => $role])}}"
+                                                       class="btn btn-info edit-role" title="Edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
 
+                                                    @if($role->name != \App\Models\Admin::SUPER_ADMIN_ROLE)
+                                                        <form method="POST" class="btn-group btn-group-sm"
+                                                              action="{{route('admin.roles.destroy' , ['role' => $role])}}">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger edit-role"
+                                                                    onclick="return confirm('Will be deleted. Sure?')"
+                                                                    type="submit" title="Delete">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endcan
                     </div>
                 </div>
             </div>
