@@ -7,12 +7,12 @@
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            {{--                            @can('event-create')--}}
-                            <button type="button" class="btn btn-default float-right" data-toggle="modal"
-                                    data-target="#modal-add-form">
-                                Add New Event
-                            </button>
-                            {{--                            @endcan--}}
+                            @can('event-create')
+                                <button type="button" class="btn btn-default float-right" data-toggle="modal"
+                                        data-target="#modal-add-form">
+                                    Add New Event
+                                </button>
+                            @endcan
                             <h4>Events</h4>
                         </div>
 
@@ -117,7 +117,7 @@
                         </div>
                         {{--end add form modal--}}
 
-{{--                        @can('event-list')--}}
+                        @can('event-list')
                             @php $i=1 @endphp
                             <div class="card-body p-0">
                                 <table class="table table-striped table-responsive-lg">
@@ -180,7 +180,7 @@
                                     </tbody>
                                 </table>
                             </div>
-{{--                        @endcan--}}
+                        @endcan
                     </div>
                 </div>
             </div>

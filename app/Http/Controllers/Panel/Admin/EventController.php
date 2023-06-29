@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:event-list|event-create|event-edit|event-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:event-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:event-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:event-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
