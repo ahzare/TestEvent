@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -60,5 +61,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class)
             ->withPivot('registered_date', 'earned')
             ->withTimestamps();
+    }
+
+    /**
+     * user files in specific event
+     */
+    public function scopeEventFiles(Builder $query, $event){
+        return $this->files()->where('event_id' , $event->id)->get();
     }
 }
