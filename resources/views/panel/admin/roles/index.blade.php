@@ -128,4 +128,16 @@
             });
         </script>
     @endif
+    @if(session('success'))
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $(document).Toasts('create', {
+                    class: 'bg-success',
+                    title: '{{__('Result')}}',
+                    // subtitle: 'Request successfully created',
+                    body: '{{session('success')}}'
+                })
+            });
+        </script>
+    @endif
 @endsection
