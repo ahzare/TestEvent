@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,5 @@ Route::group(['prefix' => 'users'], function () {
         Route::get('', [UserController::class, 'show']);
     });
 });
+
+Route::get('events', [EventController::class, 'index']);
