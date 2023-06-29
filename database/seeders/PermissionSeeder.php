@@ -23,7 +23,13 @@ class PermissionSeeder extends Seeder
             'admin-list',
             'admin-create',
             'admin-edit',
-            'admin-delete'
+            'admin-delete',
+            'event-list',
+            'event-create',
+            'event-edit',
+            'event-delete',
+            'event-users-list',
+            'event-files-list',
         ];
 
         foreach ($permissions as $permission) {
