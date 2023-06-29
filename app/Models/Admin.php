@@ -50,6 +50,6 @@ class Admin extends Authenticatable
      */
     public function events(): HasMany
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class, 'by_admin_id');
     }
 }

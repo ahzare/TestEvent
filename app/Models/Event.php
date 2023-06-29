@@ -17,7 +17,7 @@ class Event extends Model
      */
     public function creator(): BelongsTo
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class, 'by_admin_id');
     }
 
     /**
