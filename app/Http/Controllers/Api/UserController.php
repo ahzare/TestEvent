@@ -14,6 +14,7 @@ class UserController extends BaseController
     /**
      * Register api
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function register(Request $request): JsonResponse
@@ -42,16 +43,17 @@ class UserController extends BaseController
     /**
      * Login api
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function login(Request $request): JsonResponse
     {
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::guard('web')->user();
-            $success['token'] = $user->createToken('MyApp')->plainTextToken;
-            $success['user'] = $user;
+            $response['token'] = $user->createToken('MyApp')->plainTextToken;
+            $response['user'] = $user;
 
-            return $this->sendResponse($success, 'User login successfully.');
+            return $this->sendResponse($response, 'User login successfully.');
         } else {
             return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }
@@ -60,6 +62,7 @@ class UserController extends BaseController
     /**
      * Logout api
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function logout(Request $request): JsonResponse
@@ -67,5 +70,18 @@ class UserController extends BaseController
         $request->user()->currentAccessToken()->delete();
 
         return $this->sendResponse(null, 'User logout successfully.');
+    }
+
+    /**
+     * show user api
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function show(Request $request): JsonResponse
+    {
+        $response['user'] = $request->user();
+
+        return $this->sendResponse($response, 'user fetched successfully.');
     }
 }
