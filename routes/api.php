@@ -20,6 +20,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('register', [UserController::class, 'register']);
     Route::post('login', [UserController::class, 'login']);
     Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::get('events', [UserController::class, 'events']);
         Route::get('logout', [UserController::class, 'logout']);
         Route::get('', [UserController::class, 'show']);
     });

@@ -84,4 +84,19 @@ class UserController extends BaseController
 
         return $this->sendResponse($response, 'user fetched successfully.');
     }
+
+    /**
+     * show user events api
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function events(Request $request): JsonResponse
+    {
+        $response['events'] = $request->user()->events;
+
+        return $this->sendResponse($response, 'user events fetched successfully.');
+    }
+
+
 }
