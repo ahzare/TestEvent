@@ -12,6 +12,8 @@ class Event extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'desc', 'start_date', 'end_date', 'by_admin_id'];
+
     /**
      * Get admin that owns the event.
      */
