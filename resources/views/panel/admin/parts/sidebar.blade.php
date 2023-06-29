@@ -26,6 +26,13 @@
                      with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
+                    <a href="{{route('admin.events.index')}}"
+                       class="nav-link @if(($nav_link ?? '')  == 'events') active @endif">
+                        <i class="nav-icon fas fa-clock"></i>
+                        <p>Events</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin.admins.index')}}"
                        class="nav-link @if(($nav_link ?? '')  == 'admins') active @endif">
                         <i class="nav-icon fas fa-user-graduate"></i>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Panel\Admin\AdminController;
 use App\Http\Controllers\Panel\Admin\DashboardController;
+use App\Http\Controllers\Panel\Admin\EventController;
 use App\Http\Controllers\Panel\Admin\RoleController;
 use App\Http\Controllers\Panel\LoginController;
 use App\Http\Controllers\Panel\RegisterController;
@@ -34,6 +35,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('roles', RoleController::class, ['as' => 'admin']);
     //admins
     Route::resource('admins', AdminController::class, ['as' => 'admin']);
+    //events
+    Route::resource('events', EventController::class, ['as' => 'admin']);
 
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
